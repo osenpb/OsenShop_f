@@ -1,0 +1,128 @@
+<footer
+  class="
+    mt-24
+    bg-gradient-to-b
+    from-[#2b2b2b]
+    via-[#1f1f1f]
+    to-black
+    text-white
+  "
+>
+  <!-- Separador superior sutil -->
+  <div class="h-px bg-white/10"></div>
+
+  <div class="max-w-7xl mx-auto px-6 py-16">
+
+    <!-- Grid principal -->
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
+
+      <!-- Marca -->
+      <div class="space-y-4">
+        <h2 class="text-xl font-semibold tracking-wide">
+          Osen
+        </h2>
+        <p class="text-sm text-white/70 leading-relaxed">
+          Tecnología seleccionada para quienes buscan diseño, calidad y
+          rendimiento en cada detalle.
+        </p>
+      </div>
+
+      <!-- Shop -->
+      <div>
+        <h3 class="text-sm font-semibold uppercase tracking-wider mb-4">
+          Shop
+        </h3>
+        <ul class="space-y-3 text-sm text-white/70">
+          <li>
+            <a routerLink="/shop" class="hover:text-white transition">
+              Todos los productos
+            </a>
+          </li>
+          <li>
+            <a routerLink="/brands" class="hover:text-white transition">
+              Marcas
+            </a>
+          </li>
+          <li>
+            <a routerLink="/categories" class="hover:text-white transition">
+              Categorías
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Cuenta -->
+      <div>
+        <h3 class="text-sm font-semibold uppercase tracking-wider mb-4">
+          Cuenta
+        </h3>
+        <ul class="space-y-3 text-sm text-white/70">
+          <li>
+            <a routerLink="/profile" class="hover:text-white transition">
+              Mi perfil
+            </a>
+          </li>
+          <li>
+            <a routerLink="/orders" class="hover:text-white transition">
+              Mis compras
+            </a>
+          </li>
+          <li>
+            <a routerLink="/login" class="hover:text-white transition">
+              Iniciar sesión
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Info -->
+      <div>
+        <h3 class="text-sm font-semibold uppercase tracking-wider mb-4">
+          Información
+        </h3>
+        <ul class="space-y-3 text-sm text-white/70">
+          <li>
+            <a routerLink="/blog" class="hover:text-white transition">
+              Blog
+            </a>
+          </li>
+          <li>
+            <a routerLink="/about" class="hover:text-white transition">
+              Sobre nosotros
+            </a>
+          </li>
+          <li>
+            <a routerLink="/contact" class="hover:text-white transition">
+              Contacto
+            </a>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- Footer bottom -->
+    <div
+      class="
+        mt-16
+        pt-6
+        border-t border-white/10
+        flex flex-col md:flex-row
+        items-center
+        justify-between
+        gap-4
+        text-sm text-white/50
+      "
+    >
+      <span>
+        © {{ currentYear }} Osen. Todos los derechos reservados.
+      </span>
+
+      <span>
+        Desarrollado por
+        <span class="text-white/70 font-medium">Osen</span>
+      </span>
+    </div>
+
+  </div>
+</footer>

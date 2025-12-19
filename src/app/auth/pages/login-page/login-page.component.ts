@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login-page.component',
@@ -14,7 +15,7 @@ export class LoginPageComponent {
 
   private fb = inject(FormBuilder)
   private authService = inject(AuthService);
-
+  private router = inject(Router);
 
   form = this.fb.nonNullable.group({
     email: ['', [Validators.required, Validators.email]],
@@ -28,7 +29,10 @@ export class LoginPageComponent {
 
     this.authService.login(this.form.getRawValue())
       .subscribe({
-        next: () => this.loading.set(false),
+        next: () => {
+          this.loading.set(false)
+          this.router.navigate(['/home/index']);
+        },
         error: () => this.loading.set(false)
       });
   }

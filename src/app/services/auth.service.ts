@@ -1,11 +1,11 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { computed, inject, Injectable, signal } from '@angular/core';
-import { UserResponse } from '../interfaces/user-response.interface';
+import { UserResponse } from '../auth/interfaces/user-response.interface';
 import { rxResource } from '@angular/core/rxjs-interop';
-import { RegisterRequest } from '../interfaces/register-request.interface';
-import { LoginRequest } from '../interfaces/login-request.interface';
+import { RegisterRequest } from '../auth/interfaces/register-request.interface';
+import { LoginRequest } from '../auth/interfaces/login-request.interface';
 import { catchError, Observable, of, tap, throwError } from 'rxjs';
-import { AuthResponse } from '../interfaces/auth-response.interface';
+import { AuthResponse } from '../auth/interfaces/auth-response.interface';
 
 
 type AuthStatus = 'checking' | 'authenticated' | 'not-authenticated';

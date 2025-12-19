@@ -1,0 +1,142 @@
+<nav class="fixed top-0 left-0 right-0 z-50
+    bg-neutral-800/95 backdrop-blur
+    shadow-md">
+  <div class="max-w-7xl mx-auto px-6 py-4">
+    <div
+      class="flex items-center justify-between
+             backdrop-blur-md bg-black/30
+             rounded-full px-8 py-3 shadow-lg"
+    >
+
+      <!-- Logo -->
+      <div class="text-white font-semibold text-lg tracking-wide">
+        Osen
+      </div>
+
+      <!-- Links -->
+      <ul class="flex items-center gap-8 text-sm font-medium text-white">
+        <li><a
+            routerLink="/brands"
+            class="
+            hover:bg-black/40
+              p-2
+              hover:rounded-2xl
+              hover:backdrop-blur-md
+              transition
+              cursor-pointer">Brands</a></li>
+
+          <li><a routerLink="/shop"
+            class="
+            hover:text-gray-300
+              p-2
+              hover:rounded-2xl
+              hover:backdrop-blur-md
+              transition
+              cursor-pointer">Shop</a></li>
+        <li><a routerLink="/blog"
+            class="
+            hover:text-gray-300
+              p-2
+              hover:rounded-2xl
+              hover:backdrop-blur-md
+              transition
+              cursor-pointer">Blog</a></li>
+      </ul>
+
+      <!-- Actions -->
+      <div class="flex items-center gap-4 relative">
+
+        @if (isAuthenticated()) {
+
+          <!-- Cart icon -->
+          <a
+            routerLink="/cart"
+            class="text-white hover:text-gray-300 transition"
+            aria-label="Cart"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none"
+              viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5
+                   M7 13l-2 9m12-9l2 9m-5-9v9"/>
+            </svg>
+          </a>
+
+          <!-- User dropdown -->
+          <div class="relative">
+
+            <!-- User icon -->
+            <button
+              type="button"
+              (click)="toggleUserMenu()"
+              class="text-white hover:text-gray-300 transition"
+              aria-label="User menu"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none"
+                viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M5.121 17.804A13.937 13.937 0 0112 15
+                     c2.5 0 4.847.655 6.879 1.804
+                     M15 10a3 3 0 11-6 0 3 3 0 016 0z"/>
+              </svg>
+            </button>
+
+            @if (isUserMenuOpen()) {
+              <div
+                class="absolute right-0 mt-3 w-48
+                      backdrop-blur-md bg-black/60 text-white
+                      border border-white/10
+                      rounded-xl shadow-xl
+                      overflow-hidden"
+              >
+
+                <a
+                  routerLink="/profile"
+                  (click)="closeUserMenu()"
+                  class="block px-4 py-3 text-sm
+                        hover:bg-white/10 transition"
+                >
+                  Mi perfil
+                </a>
+
+                <a
+                  routerLink="/orders"
+                  (click)="closeUserMenu()"
+                  class="block px-4 py-3 text-sm
+                        hover:bg-white/10 transition"
+                >
+                  Mis compras
+                </a>
+
+                <button
+                  (click)="logout()"
+                  class="w-full text-left px-4 py-3 text-sm
+                        text-red-400 hover:bg-white/10 transition"
+                >
+                  Cerrar sesión
+                </button>
+
+              </div>
+            }
+
+          </div>
+
+        } @else {
+
+          <!-- Login button -->
+          <a
+            routerLink="/login"
+            class="text-sm font-medium text-black bg-white
+                   px-5 py-2 rounded-full
+                   hover:bg-gray-200 transition"
+          >
+            Iniciar sesión
+          </a>
+
+        }
+
+      </div>
+
+    </div>
+  </div>
+</nav>

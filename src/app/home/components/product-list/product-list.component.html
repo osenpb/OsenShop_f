@@ -1,0 +1,79 @@
+<section class="max-w-7xl mx-auto px-6 py-8">
+
+  {{cargarProductos()}}
+  @if (isLoading()) {
+    <div class="flex justify-center py-10">
+      <span class="text-gray-500 text-sm">Cargando productos...</span>
+    </div>
+  }
+
+  @else if (error()) {
+    <div class="bg-red-100 text-red-700 px-4 py-3 rounded mb-6">
+      Ocurrió un error al cargar los productos.
+    </div>
+  }
+
+  @else if (products().length === 0) {
+    <div class="text-center text-gray-500 py-10">
+      No hay productos disponibles.
+    </div>
+  }
+
+  @else {
+    <div
+      class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6">
+
+      @for (product of products(); track product.id) {
+        <article
+          class="border rounded-lg shadow-sm hover:shadow-md transition bg-white overflow-hidden">
+
+
+          <div class="h-48 bg-gray-100 flex items-center justify-center">
+            @if (product.imageUrl) {
+              <img
+                [src]="product.imageUrl"
+                [alt]="product.name"
+                class="h-full w-full object-cover" />
+            }
+            @else {
+              <span class="text-gray-400 text-sm">
+                Sin imagen
+              </span>
+            }
+          </div>
+
+
+          <div class="p-4 space-y-2">
+
+            <h3 class="text-lg font-semibold text-gray-800 truncate">
+              {{ product.name }}
+            </h3>
+
+            <p class="text-sm text-gray-500">
+              {{ product.category.name }}
+            </p>
+
+            <p class="text-gray-700 text-sm line-clamp-2">
+              {{ product.description }}
+            </p>
+
+            <div class="flex items-center justify-between pt-2">
+              <span class="text-lg font-bold text-black">
+                S/ {{ product.price  }}
+              </span>
+
+              <button
+                [routerLink]="['/home/product/detail', product.id]"
+                class="px-3 py-1 text-sm rounded bg-black text-white hover:bg-gray-700 transition">
+                Ver
+              </button>
+            </div>
+
+          </div>
+        </article>
+      }
+
+    </div>
+  }
+
+</section>
