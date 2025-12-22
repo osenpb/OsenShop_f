@@ -1,10 +1,12 @@
 import { CategoryResponse } from "./category-response.interface";
 
+
 export interface ProductResponse {
-  id: string;
+  id: number;
   name: string;
-  price: number;
   description: string;
+  price: number;
+  stock: number;
   imageUrl: string;
   category: CategoryResponse;
 }

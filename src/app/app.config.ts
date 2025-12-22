@@ -6,6 +6,8 @@ import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/
 import { authInterceptor } from './interceptors/auth.interceptor';
 import { loggingInterceptor } from './interceptors/logging.interceptor';
 
+import { provideSweetAlert2 } from "@sweetalert2/ngx-sweetalert2";
+
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
@@ -14,6 +16,10 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(withFetch(),
     withInterceptors([
       authInterceptor,
-      loggingInterceptor]))
+      loggingInterceptor])),
+    provideSweetAlert2({
+            fireOnInit: false,
+            dismissOnDestroy: true,
+        }),
   ]
 };

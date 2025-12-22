@@ -1,2 +1,36 @@
 /* You can add global styles to this file, and also import other style files */
 @import "tailwindcss";
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.snackbar-success {
+  background-color: #16a34a; /* verde */
+  color: #ffffff;
+}
+
+.snackbar-error {
+  background-color: #dc2626; /* rojo */
+  color: #ffffff;
+}
+
+.snackbar-info {
+  background-color: #2563eb;
+  color: #ffffff;
+}
+
+.snackbar-success::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 4px;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.7);
+  animation: snackbar-timer 3s linear forwards;
+}
+
+@keyframes snackbar-timer {
+  from { width: 100%; }
+  to   { width: 0%; }
+}

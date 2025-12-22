@@ -5,7 +5,8 @@ import { HttpHandlerFn, HttpRequest } from "@angular/common/http";
 
 
 export function authInterceptor(req: HttpRequest<unknown>, next: HttpHandlerFn) {
-  const token = inject(AuthService).token();
+  const authService = inject(AuthService);
+  const token = authService.token();
 
 
   if (token && !req.url.includes('/api/v1/auth/')) {

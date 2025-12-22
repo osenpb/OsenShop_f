@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class LoginPageComponent {
 
-   loading = signal(false);
+  loading = signal(false);
 
   private fb = inject(FormBuilder)
   private authService = inject(AuthService);
@@ -31,7 +31,9 @@ export class LoginPageComponent {
       .subscribe({
         next: () => {
           this.loading.set(false)
-          this.router.navigate(['/home/index']);
+          setTimeout(() => {
+            this.router.navigate(['/home/index']);
+          });
         },
         error: () => this.loading.set(false)
       });

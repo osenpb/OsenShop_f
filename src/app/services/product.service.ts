@@ -1,8 +1,8 @@
 
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { ProductResponse } from '../home/interfaces/product-response.interface';
-import { ProductRequest } from '../home/interfaces/product-request.interface';
+import { ProductResponse } from '../home/product/interfaces/product-response.interface';
+import { ProductRequest } from '../home/product/interfaces/product-request.interface';
 
 @Injectable({
   providedIn: 'root'

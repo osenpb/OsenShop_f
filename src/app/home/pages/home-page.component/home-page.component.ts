@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { ProductListComponent } from "../../components/product-list/product-list.component";
+import { ProductListComponent } from "../../product/components/product-list/product-list.component";
 import { CategoryListComponent } from "../../components/category-list/category-list.component";
 import { NewsletterFormComponent } from "../../components/newsletter-form/newsletter-form.component";
 import { ImageHeaderComponent } from "../../layout/image-header/image-header.component";
