@@ -6,46 +6,29 @@ import { CartResponse } from '../../interfaces/cart-response.interface';
 import { CartService } from '../../../../services/cart.service';
 import { OrderFormRequest } from '../../../order/interfaces/order-form-request.interface';
 import { RouterLink } from "@angular/router";
+import { CartItemListComponent } from "../../components/cart-item-list/cart-item-list.component";
+import { CartSummaryComponent } from "../../components/cart-summary/cart-summary.component";
 
 @Component({
   selector: 'app-cart-detail-page',
-  imports: [RouterLink],
+  imports: [CartItemListComponent, CartSummaryComponent],
   templateUrl: './cart-detail-page.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CartDetailPageComponent {
 
-  private cartService = inject(CartService);
-  private OrderService = inject(OrderService);
+  cartService = inject(CartService);
 
-  cartResource = rxResource<CartResponse, void>({
-    stream: () => this.cartService.getCartFromUser(),
-  });
+  cartItems = computed(() => this.cartService.cartItems);
 
-  isLoading = computed(() => this.cartResource.isLoading());
-  error = computed(() => this.cartResource.error());
-  cart = computed(() => this.cartResource.value());
+  cart = computed(() => this.cartService.cart);
+  error = computed(() => this.cartService.error);
 
-  cartItems = computed(() => this.cartResource.value()?.cartItemsResponse) ?? [];
+  isLoading = computed(() => this.cartService.isLoading);
 
-  total = computed(() => this.cartResource.value()?.total);
-
-  removeFromCart(itemId: number) {
-    this.cartService.removeFromCart(itemId).subscribe({
-      next: () => {
-        this.cartResource.reload();
-      },
-      error: () => {
-        this.cartResource.reload();
-      },
-    });
+  ngOnInit() {
+    this.cartService.loadCart();
   }
-
-  // shop handling
-  createOrder(orderFormRequest: OrderFormRequest) {
-    this.OrderService.createOrder(orderFormRequest).subscribe;
-  }
-
 
 
 }

@@ -14,7 +14,7 @@ export class NavBarComponent {
   private router = inject(Router);
 
 
-  isAuthenticated = this.authService.isAuthenticated; // tamalcreo
+  isAuthenticated = this.authService.isAuthenticated;
   user = this.authService.user; // esto trae el signal, si usara user() traeria el valor actual, x lo que no seria reactivo
   isUserMenuOpen = signal(false);
 

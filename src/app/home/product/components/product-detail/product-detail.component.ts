@@ -53,17 +53,7 @@ export class ProductDetailComponent {
 
     this.isAddingToCart.set(true);
 
-    this.cartService.addToCart(product.id, this.quantity())
-      .subscribe({
-        next: () => {
-          this.quantity.set(1);
-          this.isAddingToCart.set(false);
-          this.notification.success('Producto agregado al carrito');
-        },
-        error: () => {
-          this.isAddingToCart.set(false);
-        }
-    });
+    this.cartService.addToCart(product.id, this.quantity());
   }
 
   // Quantity handling
