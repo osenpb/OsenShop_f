@@ -1,172 +1,272 @@
-<nav class="
+<nav
+  class="
     fixed top-0 left-0 right-0 z-50 pb-2
     bg-black/80 backdrop-blur-md
     border-b border-white/10
-  ">
+  "
+>
   <div class="max-w-7xl mx-auto px-6 py-4">
 
-    <div class="
+    <div
+      class="
         flex items-center justify-between
         backdrop-blur-xl bg-black/40
         border border-white/10
         rounded-full
-        px-8 py-3
+        px-6 lg:px-8 py-3
         shadow-[0_8px_30px_rgba(0,0,0,0.4)]
-      ">
+      "
+    >
 
-      <!-- Logo -->
-      <div class="
+      <!-- LOGO -->
+      <div
+        class="
           text-white font-semibold
           text-lg tracking-wide
           select-none
-        ">
+        "
+      >
         OsenShop
       </div>
 
-      <!-- Links -->
-      <ul class="
-          flex items-center gap-8
+      <!-- LINKS DESKTOP -->
+      <ul
+        class="
+          hidden lg:flex
+          items-center gap-8
           text-sm font-medium
           text-white/90
-        ">
-
+        "
+      >
         <li>
-          <a routerLink="/brands" class="
-              px-3 py-2
-              rounded-xl
+          <a
+            routerLink="/brands"
+            class="
+              px-3 py-2 rounded-xl
               hover:bg-white/10
               hover:text-white
               transition
-              cursor-pointer
-            ">
+            "
+          >
             Brands
           </a>
         </li>
 
         <li>
-          <a routerLink="/home/index" class="
-              px-3 py-2
-              rounded-xl
+          <a
+            routerLink="/home/index"
+            class="
+              px-3 py-2 rounded-xl
               hover:bg-white/10
               hover:text-white
               transition
-              cursor-pointer
-            ">
+            "
+          >
             Shop
           </a>
         </li>
 
         <li>
-          <a routerLink="/blog" class="
-              px-3 py-2
-              rounded-xl
+          <a
+            routerLink="/blog"
+            class="
+              px-3 py-2 rounded-xl
               hover:bg-white/10
               hover:text-white
               transition
-              cursor-pointer
-            ">
+            "
+          >
             Blog
           </a>
         </li>
-
       </ul>
 
-      <!-- Actions -->
+      <!-- ACTIONS -->
       <div class="flex items-center gap-4 relative">
 
+        <!-- MOBILE HAMBURGER -->
+        <button
+          type="button"
+          class="lg:hidden text-white"
+          (click)="toggleMobileMenu()"
+          aria-label="Open menu"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6"
+               fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+
         @if (isAuthenticated()) {
-        {{ showUser() }}
-        <!-- Cart icon -->
-        <a routerLink="/home/cart" class="
+
+          <!-- CART -->
+          <a
+            routerLink="/home/cart"
+            class="
+              hidden lg:block
               text-white/90
               hover:text-white
               transition
-            " aria-label="Cart">
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5
-                       M7 13l-2 9m12-9l2 9m-5-9v9" />
-          </svg>
-        </a>
+            "
+            aria-label="Cart"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5"
+                 fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M3 3h2l.4 2M7 13h10l4-8H5.4
+                       M7 13L5.4 5M7 13l-2 9
+                       m12-9l2 9m-5-9v9" />
+            </svg>
+          </a>
 
-        <!-- User dropdown -->
-        <div class="relative">
+          <!-- USER DROPDOWN DESKTOP -->
+          <div class="relative hidden lg:block">
 
-          <!-- User icon -->
-          <button type="button" (click)="toggleUserMenu()" class="
+            <button
+              type="button"
+              (click)="toggleUserMenu()"
+              class="
+                flex items-center gap-2
                 text-white/90
                 hover:text-white
                 transition
-              " aria-label="User menu">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24"
-              stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 15
+              "
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5"
+                   fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M5.121 17.804A13.937 13.937 0 0112 15
                          c2.5 0 4.847.655 6.879 1.804
                          M15 10a3 3 0 11-6 0 3 3 0 016 0z" />
-            </svg>
-            @if (user()?.firstName) {
-            <span>{{ user()?.firstName }}</span>
-            }
-          </button>
+              </svg>
 
-          @if (isUserMenuOpen()) {
-          <div class="
+              @if (user()?.firstName) {
+                <span>{{ user()?.firstName }}</span>
+              }
+            </button>
+
+            @if (isUserMenuOpen()) {
+              <div
+                class="
                   absolute right-0 mt-3 w-48
                   backdrop-blur-xl bg-black/70
                   border border-white/10
-                  rounded-xl shadow-xl
+                  rounded-xl
+                  shadow-xl
                   overflow-hidden
                   text-white
-                ">
+                "
+              >
+                <a
+                  routerLink="/home/profile"
+                  (click)="closeUserMenu()"
+                  class="block px-4 py-3 text-sm hover:bg-white/10 transition"
+                >
+                  Mi perfil
+                </a>
 
-            <a routerLink="/home/profile" (click)="closeUserMenu()" class="
-                    block px-4 py-3 text-sm
-                    hover:bg-white/10
-                    transition
-                  ">
-              Mi perfil
-            </a>
+                <a
+                  routerLink="/home/cart"
+                  (click)="closeUserMenu()"
+                  class="block px-4 py-3 text-sm hover:bg-white/10 transition"
+                >
+                  Mi carrito
+                </a>
 
-            <a routerLink="/home/cart" (click)="closeUserMenu()" class="
-                    block px-4 py-3 text-sm
-                    hover:bg-white/10
-                    transition
-                  ">
-              Mi carrito
-            </a>
-
-            <button (click)="logout()" class="
-                    w-full text-left px-4 py-3 text-sm
+                <button
+                  (click)="logout()"
+                  class="
+                    w-full text-left
+                    px-4 py-3 text-sm
                     text-red-400
                     hover:bg-white/10
                     transition
-                  ">
-              Cerrar sesión
-            </button>
-
+                  "
+                >
+                  Cerrar sesión
+                </button>
+              </div>
+            }
           </div>
-          }
-
-        </div>
 
         } @else {
 
-        <!-- Login button -->
-        <a routerLink="/login" class="
+          <!-- LOGIN DESKTOP -->
+          <a
+            routerLink="/login"
+            class="
+              hidden lg:block
               text-sm font-medium
               bg-white text-black
               px-5 py-2
               rounded-full
               hover:bg-white/90
               transition
-            ">
-          Iniciar sesión
-        </a>
-
+            "
+          >
+            Iniciar sesión
+          </a>
         }
 
       </div>
 
     </div>
-
   </div>
 </nav>
+
+<!-- MOBILE MENU -->
+@if (mobileMenuOpen()) {
+  <div
+    class="
+      fixed inset-0 z-40
+      bg-black/60 backdrop-blur-sm
+      lg:hidden
+    "
+    (click)="closeMobileMenu()"
+  >
+    <div
+      class="
+        absolute top-24 left-4 right-4
+        bg-black/80 backdrop-blur-xl
+        border border-white/10
+        rounded-2xl
+        p-6
+        space-y-4
+        text-white
+      "
+      (click)="$event.stopPropagation()"
+    >
+
+      <a routerLink="/brands" (click)="closeMobileMenu()" class="block py-2">Brands</a>
+      <a routerLink="/home/index" (click)="closeMobileMenu()" class="block py-2">Shop</a>
+      <a routerLink="/blog" (click)="closeMobileMenu()" class="block py-2">Blog</a>
+
+      <hr class="border-white/10">
+
+      @if (isAuthenticated()) {
+        <a routerLink="/home/cart" (click)="closeMobileMenu()" class="block py-2">Mi carrito</a>
+        <a routerLink="/home/profile" (click)="closeMobileMenu()" class="block py-2">Mi perfil</a>
+        <button
+          (click)="logout(); closeMobileMenu()"
+          class="w-full text-left py-2 text-red-400"
+        >
+          Cerrar sesión
+        </button>
+      } @else {
+        <a
+          routerLink="/login"
+          (click)="closeMobileMenu()"
+          class="
+            block text-center
+            bg-white text-black
+            py-2 rounded-xl
+          "
+        >
+          Iniciar sesión
+        </a>
+      }
+
+    </div>
+  </div>
+}

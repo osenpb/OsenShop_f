@@ -21,7 +21,7 @@ export class OrderService {
   }
 
   createOrder(orderForm: OrderFormRequest) {
-    return this.http.post<OrderResponse>(`${this.baseUrl}`, orderForm);
+    return this.http.post<OrderResponse>(`${this.baseUrl}/checkout`, orderForm);
   }
 
 

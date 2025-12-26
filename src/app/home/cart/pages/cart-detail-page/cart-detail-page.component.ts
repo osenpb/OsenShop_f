@@ -5,7 +5,7 @@ import { rxResource } from '@angular/core/rxjs-interop';
 import { CartResponse } from '../../interfaces/cart-response.interface';
 import { CartService } from '../../../../services/cart.service';
 import { OrderFormRequest } from '../../../order/interfaces/order-form-request.interface';
-import { RouterLink } from "@angular/router";
+import { ActivatedRoute, Router, RouterLink } from "@angular/router";
 import { CartItemListComponent } from "../../components/cart-item-list/cart-item-list.component";
 import { CartSummaryComponent } from "../../components/cart-summary/cart-summary.component";
 
@@ -18,17 +18,14 @@ import { CartSummaryComponent } from "../../components/cart-summary/cart-summary
 export class CartDetailPageComponent {
 
   cartService = inject(CartService);
+  router = inject(Router);
+  route = inject(ActivatedRoute);
 
-  cartItems = computed(() => this.cartService.cartItems);
+  readonly cart = this.cartService.cart;
+  readonly cartItems = this.cartService.cartItems;
+  readonly error = this.cartService.error;
+  readonly isLoading = this.cartService.isLoading;
 
-  cart = computed(() => this.cartService.cart);
-  error = computed(() => this.cartService.error);
-
-  isLoading = computed(() => this.cartService.isLoading);
-
-  ngOnInit() {
-    this.cartService.loadCart();
-  }
 
 
 }

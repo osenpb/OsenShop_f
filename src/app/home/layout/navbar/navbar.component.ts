@@ -18,6 +18,9 @@ export class NavBarComponent {
   user = this.authService.user; // esto trae el signal, si usara user() traeria el valor actual, x lo que no seria reactivo
   isUserMenuOpen = signal(false);
 
+  mobileMenuOpen = signal(false);
+
+
   toggleUserMenu() {
     this.isUserMenuOpen.update(v => !v);
   }
@@ -29,6 +32,15 @@ export class NavBarComponent {
   logout() {
     //this.authService.logout(); // todavia no implementado
     this.closeUserMenu();
+  }
+
+
+  toggleMobileMenu() {
+    this.mobileMenuOpen.update(v => !v);
+  }
+
+  closeMobileMenu() {
+    this.mobileMenuOpen.set(false);
   }
 
   showUser() {

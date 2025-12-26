@@ -4,6 +4,7 @@ import { AuthService } from '../../../../services/auth.service';
 import { OrderFormRequest } from '../../interfaces/order-form-request.interface';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-checkout-form',
@@ -16,6 +17,7 @@ export class CheckoutComponent {
   private orderService = inject(OrderService);
   private authService = inject(AuthService);
   private fb = inject(FormBuilder)
+  private router = inject(Router);
 
   readonly user = this.authService.user;
 
@@ -23,21 +25,18 @@ export class CheckoutComponent {
     shippingAddress: ''
   };
 
-   confirm = new EventEmitter<OrderFormRequest>();
 
   readonly form = this.fb.nonNullable.group({
     shippingAddress: ['', [Validators.required, Validators.minLength(10)]]
   });
 
 
-  submit() {
-    if (this.form.invalid) {
-      this.form.markAllAsTouched();
-      return;
-    }
-
-    this.confirm.emit(this.form.getRawValue());
+  onSubmit() {
+    if (this.form.invalid) return;
+    this.orderService.createOrder(this.form.getRawValue()).subscribe({
+      next: () => this.router.navigate(['/home/index']),
+      error: () => console.log('error')
+    });
   }
-
 
 }

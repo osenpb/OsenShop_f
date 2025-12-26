@@ -1,14 +1,13 @@
-<section class="max-w-4xl mx-auto px-6 py-16 text-white">
-
-  <h1 class="text-2xl font-semibold mb-10">
-    Finalizar compra
-  </h1>
-
+<section class="max-w-4xl px-6 py-16 text-white">
   <form
     [formGroup]="form"
-    (ngSubmit)="submit()"
-    class="space-y-10"
+    (ngSubmit)="onSubmit()"
+    class="space-y-10 bg-black p-5"
   >
+
+  <h1 class="text-2xl font-semibold p-5 text-center">
+    Finalizar compra
+  </h1>
 
     <!-- ======================
          Información del usuario
@@ -107,7 +106,7 @@
         type="submit"
         [disabled]="form.invalid"
         class="
-          bg-white text-black px-8 py-3 rounded-full text-sm font-medium
+          bg-white text-black px-8 py-3 rounded-full text-sm font-medium cursor-pointer
           hover:bg-gray-200 transition
           disabled:opacity-40 disabled:cursor-not-allowed
         "

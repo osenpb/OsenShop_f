@@ -11,8 +11,8 @@ export class CartItemListComponent {
 
   cartService = inject(CartService);
 
-  cartItems = computed(() => this.cartService.cartItems);
-
+  cartItems = this.cartService.cartItems;
+  
   removeFromCart(id: number) {
     this.cartService.removeFromCart(id);
   }
