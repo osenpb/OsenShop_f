@@ -2,13 +2,13 @@ import { ChangeDetectionStrategy, Component, EventEmitter, inject } from '@angul
 import { OrderService } from '../../../../services/order.service';
 import { AuthService } from '../../../../services/auth.service';
 import { OrderFormRequest } from '../../interfaces/order-form-request.interface';
-import { CommonModule } from '@angular/common';
+
 import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-checkout-form',
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [ReactiveFormsModule],
   templateUrl: './checkout-form.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
