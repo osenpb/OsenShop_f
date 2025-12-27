@@ -1,0 +1,31 @@
+<div class="relative min-h-screen w-full overflow-hidden bg-black flex items-center justify-center font-sans">
+
+  <div class="absolute inset-0 overflow-hidden">
+    <div class="absolute top-[20%] left-[30%] h-[60%] w-[60%] rounded-full bg-white/5 blur-[130px] animate-pulse"></div>
+  </div>
+
+  <div class="bg-grid-pattern absolute inset-0 text-zinc-800/40 [mask-image:radial-gradient(ellipse_at_center,black,transparent)]"></div>
+
+  <main class="relative z-10 w-full max-w-md px-6">
+    <div class="rounded-lg border border-zinc-800 bg-zinc-950/70 p-8 backdrop-blur-2xl shadow-2xl">
+
+      <div class="mb-10 text-center">
+        <h1 class="text-2xl font-semibold tracking-tighter text-white uppercase">
+          Osen<span class="text-zinc-500 font-light">Shop</span>
+        </h1>
+        <div class="h-[1px] w-12 bg-zinc-800 mx-auto mt-4"></div>
+      </div>
+
+      <div class="text-zinc-200">
+        <router-outlet></router-outlet>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="absolute bottom-8 w-full text-center">
+    <p class="text-[10px] uppercase tracking-[0.2em] text-zinc-600 font-medium">
+      &copy; 2025 — OsenShop Concept
+    </p>
+  </footer>
+</div>

@@ -9,6 +9,10 @@ export const routes: Routes = [
     path: 'home',
     loadChildren: () => import('./home/home.routes'),
   },
+  {
+    path: 'admin',
+    loadChildren: () => import('./admin/admin.routes').then(m => m.default),
+  },
    {
     path: '**',
     redirectTo: 'auth/login',

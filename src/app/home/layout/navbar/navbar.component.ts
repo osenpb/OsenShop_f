@@ -30,8 +30,9 @@ export class NavBarComponent {
   }
 
   logout() {
-    //this.authService.logout(); // todavia no implementado
+    this.authService.logout(); 
     this.closeUserMenu();
+    this.router.navigate(['/login']);
   }
 
 

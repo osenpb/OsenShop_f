@@ -1,11 +1,11 @@
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../../services/auth.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-login-page.component',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, RouterLink],
   templateUrl: './login-page.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -31,10 +31,13 @@ export class LoginPageComponent {
       .subscribe({
         next: () => {
           this.loading.set(false)
-          setTimeout(() => {
+          if(this.authService.user()?.role === 'ROLE_ADMIN'){
+            this.router.navigate(['/admin']);
+          }
             this.router.navigate(['/home/index']);
-          });
-        },
+
+
+          },
         error: () => this.loading.set(false)
       });
   }

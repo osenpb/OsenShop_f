@@ -1,3 +1,4 @@
+import { AuthLayoutComponent } from './layout/auth-layout.component/auth-layout.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { RegisterPageComponent } from './pages/register-page/register-page.component';
 
@@ -5,6 +6,7 @@ import { RegisterPageComponent } from './pages/register-page/register-page.compo
 const authRoutes = [
   {
     path: '',
+    component: AuthLayoutComponent,
     children:[
       {
         path: 'login',

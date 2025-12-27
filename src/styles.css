@@ -1,9 +1,30 @@
-/* You can add global styles to this file, and also import other style files */
+
 @import "tailwindcss";
+@import "primeicons/primeicons.css";
+
+/*
+
+:root {
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, sans-serif;
+}
+*/
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
+html, body {
+  font-family: var(--font-sans);
+}
+
+// AUTH-LAYOUT
+.bg-grid-pattern {
+background-image: radial-gradient(circle, currentColor 1px, transparent 1px);
+    background-size: 24px 24px;
+}
+//
+
+// SNACKBAR NOFITICATION
 .snackbar-success {
   background-color: #16a34a; /* verde */
   color: #ffffff;
