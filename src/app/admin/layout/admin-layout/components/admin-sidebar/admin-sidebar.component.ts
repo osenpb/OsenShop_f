@@ -1,9 +1,10 @@
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { AuthService } from '../../../../../services/auth.service';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-admin-sidebar',
-  imports: [],
+  imports: [RouterLink, RouterLinkActive],
   templateUrl: './admin-sidebar.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -42,5 +43,7 @@ export class AdminSidebarComponent {
   closeSidebar() {
     this.sidebarOpen.set(false);
   }
+
+
 
 }

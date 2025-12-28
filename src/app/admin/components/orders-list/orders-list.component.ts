@@ -1,0 +1,32 @@
+import { OrderService } from './../../../services/order.service';
+import { DatePipe, DecimalPipe, NgClass } from '@angular/common';
+import { ChangeDetectionStrategy, Component, inject, computed } from '@angular/core';
+import { OrderResponse } from '../../../home/order/interfaces/order-response.interface';
+import { rxResource } from '@angular/core/rxjs-interop';
+
+@Component({
+  selector: 'app-admin-orders-list',
+  imports: [DatePipe, DecimalPipe, NgClass],
+  templateUrl: './orders-list.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class OrderListComponent {
+
+    private orderService = inject(OrderService);
+
+    ordersResource = rxResource<OrderResponse[], void>({
+      stream: () => this.orderService.getAllOrders(),
+    });
+
+
+    orders = computed(() => {return this.ordersResource.value() ?? []});
+
+    isLoading = this.ordersResource.isLoading();
+    error = this.ordersResource.error();
+
+
+
+viewDetails(arg0: any) {
+throw new Error('Method not implemented.');
+}
+}

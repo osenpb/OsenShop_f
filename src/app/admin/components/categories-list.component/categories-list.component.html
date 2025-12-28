@@ -1,0 +1,85 @@
+<div class="bg-black min-h-screen w-full py-12 px-6">
+  <div class="max-w-4xl mx-auto">
+
+    <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-12">
+      <div>
+        <h1 class="text-3xl font-bold tracking-tighter text-white uppercase italic">
+          Gestión <span class="text-zinc-500 font-light">Categorías</span>
+        </h1>
+        <p class="text-zinc-500 text-[10px] mt-1 uppercase tracking-[0.3em]">Clasificación de Inventario OsenShop</p>
+      </div>
+
+      <button class="bg-white text-black px-8 py-2.5 rounded-full text-xs font-bold uppercase tracking-widest hover:bg-zinc-200 transition-all shadow-[0_0_20px_rgba(255,255,255,0.1)] active:scale-95">
+        + Nueva Categoría
+      </button>
+    </div>
+
+    <div class="backdrop-blur-md bg-zinc-950/50 border border-zinc-800 rounded-2xl overflow-hidden shadow-2xl">
+      <table class="w-full text-left border-collapse">
+        <thead>
+          <tr class="border-b border-zinc-900 bg-zinc-900/30">
+            <th class="px-8 py-5 text-[10px] uppercase tracking-[0.2em] text-zinc-500 font-bold">ID Ref.</th>
+            <th class="px-8 py-5 text-[10px] uppercase tracking-[0.2em] text-zinc-500 font-bold">Nombre de Categoría</th>
+            <th class="px-8 py-5 text-[10px] uppercase tracking-[0.2em] text-zinc-500 font-bold text-right">Acciones</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-zinc-900/50">
+          @for (category of categories(); track category.id) {
+            <tr class="hover:bg-zinc-900/40 transition-all group">
+
+              <td class="px-8 py-5">
+                <span class="font-mono text-[11px] text-zinc-600 bg-zinc-900/80 px-2 py-1 rounded border border-zinc-800 group-hover:text-zinc-400 transition-colors">
+                  #{{ category.id}}
+                </span>
+              </td>
+
+              <td class="px-8 py-5">
+                <div class="flex items-center gap-3">
+                  <div class="w-1.5 h-1.5 rounded-full bg-zinc-800 group-hover:bg-white transition-colors"></div>
+                  <span class="text-sm font-medium text-zinc-200 uppercase tracking-tight group-hover:text-white transition-colors">
+                    {{ category.name }}
+                  </span>
+                </div>
+              </td>
+
+              <td class="px-8 py-5">
+                <div class="flex items-center justify-end gap-3">
+                  <button
+                    (click)="onEdit(category)"
+                    class="p-2.5 rounded-xl bg-zinc-900 border border-zinc-800 text-zinc-500 hover:text-white hover:border-zinc-600 hover:bg-zinc-800 transition-all"
+                    title="Editar categoría"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2.828 2.828 0 114 4L11.828 15H9v-2.828l8.586-8.586z" />
+                    </svg>
+                  </button>
+
+                  <button
+                    (click)="onDelete(category.id)"
+                    class="p-2.5 rounded-xl bg-zinc-900 border border-zinc-800 text-zinc-600 hover:text-red-400 hover:border-red-900/30 hover:bg-red-950/20 transition-all"
+                    title="Eliminar categoría"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                    </svg>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          } @empty {
+            <tr>
+              <td colspan="3" class="px-8 py-20 text-center">
+                <div class="flex flex-col items-center gap-3">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 text-zinc-800" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
+                  </svg>
+                  <p class="text-zinc-600 text-xs uppercase tracking-widest font-medium">No hay categorías registradas</p>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

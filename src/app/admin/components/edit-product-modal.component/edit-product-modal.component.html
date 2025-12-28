@@ -1,0 +1,111 @@
+<div class="fixed inset-0 z-[100] flex items-center justify-center p-4
+            bg-black/50 backdrop-blur-sm transition-opacity">
+
+  <div class="bg-zinc-950 border border-zinc-800 w-full max-w-2xl rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] overflow-hidden transform transition-all">
+
+    <div class="px-8 py-6 border-b border-zinc-900 flex justify-between items-center bg-zinc-900/20">
+      <div>
+        <h2 class="text-xl font-bold text-white uppercase italic tracking-tighter">
+          Editar <span class="text-zinc-500 font-light">Producto</span>
+        </h2>
+        <p class="text-[10px] text-zinc-500 uppercase tracking-widest mt-1">Ref ID: #{{ product()?.id }}</p>
+      </div>
+      <button (click)="closeModal()" class="text-zinc-500 hover:text-white transition-colors p-2">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+
+    <form [formGroup]="editForm" (ngSubmit)="onSave()" class="p-8 space-y-6">
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+        <div class="space-y-1.5 text-left">
+          <label class="text-[10px] uppercase tracking-widest text-zinc-500 ml-1">Nombre del producto</label>
+          <input
+            type="text"
+            formControlName="name"
+            [value]="product()?.name"
+            class="w-full bg-zinc-900/50 border border-zinc-800 rounded-xl px-4 py-3 text-sm text-zinc-200 placeholder-zinc-700 focus:outline-none focus:ring-1 focus:ring-zinc-600 transition-all"
+          >
+        </div>
+
+        <div class="space-y-1.5 text-left">
+          <label class="text-[10px] uppercase tracking-widest text-zinc-500 ml-1">Categoría</label>
+          <select
+            formControlName="categoryId"
+            class="w-full bg-zinc-900/50 border border-zinc-800 rounded-xl px-4 py-3 text-sm text-zinc-200 focus:outline-none focus:ring-1 focus:ring-zinc-600 transition-all appearance-none"
+          >
+            @for (cat of categories(); track cat.id) {
+              <option [value]="cat.id">{{ cat.name }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="space-y-1.5 text-left">
+          <label class="text-[10px] uppercase tracking-widest text-zinc-500 ml-1">Precio ($)</label>
+          <input
+            type="number"
+            formControlName="price"
+            [value]="product()?.price"
+            class="w-full bg-zinc-900/50 border border-zinc-800 rounded-xl px-4 py-3 text-sm text-zinc-200 focus:outline-none focus:ring-1 focus:ring-zinc-600 transition-all"
+          >
+        </div>
+
+        <div class="space-y-1.5 text-left">
+          <label class="text-[10px] uppercase tracking-widest text-zinc-500 ml-1">Cantidad en Stock</label>
+          <input
+            type="number"
+            [value]="product()?.stock"
+            formControlName="stock"
+            class="w-full bg-zinc-900/50 border border-zinc-800 rounded-xl px-4 py-3 text-sm text-zinc-200 focus:outline-none focus:ring-1 focus:ring-zinc-600 transition-all"
+          >
+        </div>
+      </div>
+
+      <div class="space-y-1.5 text-left">
+        <label class="text-[10px] uppercase tracking-widest text-zinc-500 ml-1">Descripción</label>
+        <textarea
+          formControlName="description"
+          [value]="product()?.description"
+          rows="3"
+          class="w-full bg-zinc-900/50 border border-zinc-800 rounded-xl px-4 py-3 text-sm text-zinc-200 focus:outline-none focus:ring-1 focus:ring-zinc-600 transition-all resize-none"
+        ></textarea>
+      </div>
+
+      <div class="flex items-center justify-between p-4 bg-zinc-900/30 border border-zinc-800 rounded-2xl">
+        <div>
+          <p class="text-xs font-bold text-zinc-300 uppercase tracking-tighter">Estado de Visibilidad</p>
+          <p class="text-[10px] text-zinc-600 uppercase tracking-tighter">Define si el producto aparece en la tienda</p>
+        </div>
+        <label class="relative inline-flex items-center cursor-pointer">
+          <input
+            type="checkbox"
+            formControlName="isActive"
+            class="sr-only peer"
+            [value]="product()?.isActive"
+            >
+          <div class="w-11 h-6 bg-zinc-800 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-zinc-400 after:border-zinc-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-white peer-checked:after:bg-black"></div>
+        </label>
+      </div>
+
+      <div class="flex items-center justify-end gap-4 pt-4">
+        <button
+          type="button"
+          (click)="closeModal()"
+          class="px-6 py-3 rounded-full text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-500 hover:text-white transition-colors"
+        >
+          Cancelar
+        </button>
+        <button
+          type="submit"
+          class="bg-white text-black px-10 py-3 rounded-full text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-zinc-200 transition-all shadow-[0_10px_20px_rgba(255,255,255,0.05)] active:scale-95"
+        >
+          Guardar Cambios
+        </button>
+      </div>
+
+    </form>
+  </div>
+</div>

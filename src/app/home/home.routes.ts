@@ -4,7 +4,7 @@ import { CartDetailPageComponent } from "./cart/pages/cart-detail-page/cart-deta
 import { ProductDetailComponent } from "./product/components/product-detail/product-detail.component";
 import { HomeLayoutComponent } from "./layout/home-layout/home-layout.component";
 import { HomePageComponent } from "./pages/home-page.component/home-page.component";
-import { ProductDetailPageComponent } from "./product/product-detail-page.component/product-detail-page.component";
+import { ProductDetailPageComponent } from "./product/pages/product-detail-page/product-detail-page.component";
 import { CheckoutFormPageComponent } from "./order/pages/checkout-form-page/checkout-form-page.component";
 
 

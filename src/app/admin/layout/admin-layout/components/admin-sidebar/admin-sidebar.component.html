@@ -115,9 +115,11 @@
     <!-- Footer -->
     <div class="px-3 py-4 border-t border-neutral-800">
       <button
+      (click)="logout()"
+      routerLink="/auth/login"
         class="w-full flex items-center gap-3 px-3 py-2 rounded-lg
                text-red-400 hover:bg-red-500/10 hover:text-red-300
-               transition"
+               transition cursor-pointer"
       >
         <i class="pi pi-sign-out"></i>
         Cerrar sesión

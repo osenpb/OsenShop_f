@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { ProductDetailComponent } from "../components/product-detail/product-detail.component";
+import { ProductDetailComponent } from "../../components/product-detail/product-detail.component";
 
 @Component({
   selector: 'app-product-detail-page.component',

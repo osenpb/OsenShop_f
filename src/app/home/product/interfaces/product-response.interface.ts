@@ -9,4 +9,5 @@ export interface ProductResponse {
   stock: number;
   imageUrl: string;
   category: CategoryResponse;
+  isActive: boolean;
 }

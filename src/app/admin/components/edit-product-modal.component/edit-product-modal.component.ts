@@ -1,0 +1,96 @@
+import { ProductResponse } from './../../../home/product/interfaces/product-response.interface';
+import { ProductService } from './../../../services/product.service';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { CategoryService } from './../../../services/category.service';
+import { ChangeDetectionStrategy, Component, inject, input, output, computed, signal, effect } from '@angular/core';
+import { rxResource } from '@angular/core/rxjs-interop';
+import { CategoryResponse } from '../../../home/product/interfaces/category-response.interface';
+
+@Component({
+  selector: 'app-admin-edit-product-modal',
+  imports: [ReactiveFormsModule],
+  templateUrl: './edit-product-modal.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class EditProductModalComponent {
+
+  private categoryService = inject(CategoryService);
+  private fb = inject(FormBuilder);
+  private productService = inject(ProductService);
+
+  open = input<boolean>(false);
+  close = output<void>();
+  productId = input<number>(0);
+
+
+editForm = this.fb.nonNullable.group({
+  name: ['', Validators.required],
+  categoryId: [0, Validators.required],
+  price: [0, Validators.required],
+  stock: [0, Validators.required],
+  description: ['', Validators.required],
+  isActive: [true, Validators.required],
+});
+
+
+productResource = rxResource<ProductResponse | null, number>({
+  params: () => this.productId(),
+  stream: ({ params }) =>
+    this.productService.getProductById(params),
+  defaultValue: null,
+});
+
+
+
+constructor() {
+effect(() => {
+  const product = this.product();
+  if (!product) return;
+
+  this.editForm.patchValue({
+    name: product.name,
+    categoryId: +product.category.id,
+    price: product.price,
+    stock: product.stock,
+    description: product.description,
+    isActive: product.isActive,
+  });
+});
+}
+
+
+  categoryResource = rxResource<CategoryResponse[], void>({
+    stream: () => this.categoryService.getAllCategories(),
+    }
+  );
+
+  categories = computed(() => {
+    return this.categoryResource.value();
+  })
+
+  isLoading = computed(() => this.categoryResource.isLoading());
+  error = computed(() => this.categoryResource.error());
+
+
+
+  product = computed(() => {
+    return this.productResource.value();
+  });
+
+
+
+
+
+
+  onSave() {
+throw new Error('Method not implemented.');
+}
+
+
+
+
+  closeModal() {
+    this.close.emit();
+  }
+
+ }
