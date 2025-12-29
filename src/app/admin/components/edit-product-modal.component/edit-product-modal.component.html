@@ -26,7 +26,7 @@
           <input
             type="text"
             formControlName="name"
-            [value]="product()?.name"
+
             class="w-full bg-zinc-900/50 border border-zinc-800 rounded-xl px-4 py-3 text-sm text-zinc-200 placeholder-zinc-700 focus:outline-none focus:ring-1 focus:ring-zinc-600 transition-all"
           >
         </div>
@@ -48,7 +48,7 @@
           <input
             type="number"
             formControlName="price"
-            [value]="product()?.price"
+
             class="w-full bg-zinc-900/50 border border-zinc-800 rounded-xl px-4 py-3 text-sm text-zinc-200 focus:outline-none focus:ring-1 focus:ring-zinc-600 transition-all"
           >
         </div>
@@ -57,7 +57,7 @@
           <label class="text-[10px] uppercase tracking-widest text-zinc-500 ml-1">Cantidad en Stock</label>
           <input
             type="number"
-            [value]="product()?.stock"
+
             formControlName="stock"
             class="w-full bg-zinc-900/50 border border-zinc-800 rounded-xl px-4 py-3 text-sm text-zinc-200 focus:outline-none focus:ring-1 focus:ring-zinc-600 transition-all"
           >
@@ -68,7 +68,7 @@
         <label class="text-[10px] uppercase tracking-widest text-zinc-500 ml-1">Descripción</label>
         <textarea
           formControlName="description"
-          [value]="product()?.description"
+  
           rows="3"
           class="w-full bg-zinc-900/50 border border-zinc-800 rounded-xl px-4 py-3 text-sm text-zinc-200 focus:outline-none focus:ring-1 focus:ring-zinc-600 transition-all resize-none"
         ></textarea>

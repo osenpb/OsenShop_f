@@ -1,13 +1,14 @@
-import { OrderService } from './../../../../services/order.service';
+
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 
 import { rxResource } from '@angular/core/rxjs-interop';
 import { CartResponse } from '../../interfaces/cart-response.interface';
-import { CartService } from '../../../../services/cart.service';
+
 import { OrderFormRequest } from '../../../order/interfaces/order-form-request.interface';
 import { ActivatedRoute, Router, RouterLink } from "@angular/router";
 import { CartItemListComponent } from "../../components/cart-item-list/cart-item-list.component";
 import { CartSummaryComponent } from "../../components/cart-summary/cart-summary.component";
+import { CartService } from '../../../services/cart.service';
 
 @Component({
   selector: 'app-cart-detail-page',

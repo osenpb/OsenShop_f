@@ -31,13 +31,13 @@ export class LoginPageComponent {
       .subscribe({
         next: () => {
           this.loading.set(false)
-          if(this.authService.user()?.role === 'ROLE_ADMIN'){
+          console.log(this.authService.user()?.role);
+          if(this.authService.user()?.role === "ROLE_ADMIN"){
             this.router.navigate(['/admin']);
-          }
+          }else if(this.authService.user()?.role === "ROLE_USER"){
             this.router.navigate(['/home/index']);
-
-
-          },
+          }
+        },
         error: () => this.loading.set(false)
       });
   }

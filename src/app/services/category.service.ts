@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { CategoryResponse } from '../home/product/interfaces/category-response.interface';
-import { CategoryRequest } from '../home/product/interfaces/category-request.interface';
+import { CategoryResponse } from '../product/interfaces/category-response.interface';
+import { CategoryRequest } from '../product/interfaces/category-request.interface';
+
 
 @Injectable({
   providedIn: 'root'

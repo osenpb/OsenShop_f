@@ -1,10 +1,11 @@
-import { ProductResponse } from './../../../home/product/interfaces/product-response.interface';
-import { ProductService } from './../../../services/product.service';
+import { ProductService } from '../../../services/product.service';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { CategoryService } from './../../../services/category.service';
+import { CategoryService } from '../../../services/category.service';
 import { ChangeDetectionStrategy, Component, inject, input, output, computed, signal, effect } from '@angular/core';
 import { rxResource } from '@angular/core/rxjs-interop';
-import { CategoryResponse } from '../../../home/product/interfaces/category-response.interface';
+import { ProductResponse } from '../../../product/interfaces/product-response.interface';
+import { CategoryResponse } from '../../../product/interfaces/category-response.interface';
+
 
 @Component({
   selector: 'app-admin-edit-product-modal',
@@ -76,11 +77,6 @@ effect(() => {
   product = computed(() => {
     return this.productResource.value();
   });
-
-
-
-
-
 
   onSave() {
 throw new Error('Method not implemented.');

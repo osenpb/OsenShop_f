@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 
 import { inject, Injectable } from '@angular/core';
-import { OrderResponse } from '../home/order/interfaces/order-response.interface';
-import { OrderFormRequest } from '../home/order/interfaces/order-form-request.interface';
+import { OrderResponse } from '../order/interfaces/order-response.interface';
+import { OrderFormRequest } from '../order/interfaces/order-form-request.interface';
+
 
 @Injectable({
   providedIn: 'root'

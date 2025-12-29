@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
-import { CartService } from '../../../../services/cart.service';
+import { CartService } from '../../../services/cart.service';
+
 
 @Component({
   selector: 'app-cart-item-list',
@@ -12,7 +13,7 @@ export class CartItemListComponent {
   cartService = inject(CartService);
 
   cartItems = this.cartService.cartItems;
-  
+
   removeFromCart(id: number) {
     this.cartService.removeFromCart(id);
   }

@@ -1,11 +1,12 @@
 import { ActivatedRoute, Router } from '@angular/router';
-import { ProductService } from '../../../../services/product.service';
 import { ChangeDetectionStrategy, Component, inject, signal, computed } from '@angular/core';
 import { ProductResponse } from '../../interfaces/product-response.interface';
 import { rxResource } from '@angular/core/rxjs-interop';
-import { CartService } from '../../../../services/cart.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { NotificationService } from '../../../../services/notification.service';
+import { ProductService } from '../../../services/product.service';
+import { CartService } from '../../../services/cart.service';
+import { NotificationService } from '../../../services/notification.service';
+
 @Component({
   selector: 'app-home-product-detail',
   imports: [],
@@ -14,7 +15,7 @@ import { NotificationService } from '../../../../services/notification.service';
 })
 export class ProductDetailComponent {
 
-  private ProductService = inject(ProductService);
+  private productService = inject(ProductService);
   private router = inject(Router);
   private route = inject(ActivatedRoute);
   private cartService = inject(CartService);
@@ -30,7 +31,7 @@ export class ProductDetailComponent {
   });
 
   productResource = rxResource<ProductResponse, void>({
-    stream: () => this.ProductService.getProductById(this.productId()
+    stream: () => this.productService.getProductById(this.productId()
       ),
   });
 

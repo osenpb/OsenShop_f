@@ -1,9 +1,10 @@
 import { rxResource } from '@angular/core/rxjs-interop';
-import { ProductService } from './../../../services/product.service';
+import { ProductService } from '../../../services/product.service';
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
-import { ProductResponse } from '../../../home/product/interfaces/product-response.interface';
+
 import { DecimalPipe } from '@angular/common';
 import { EditProductModalComponent } from "../edit-product-modal.component/edit-product-modal.component";
+import { ProductResponse } from '../../../product/interfaces/product-response.interface';
 
 @Component({
   selector: 'app-admin-product-list',
@@ -14,6 +15,8 @@ import { EditProductModalComponent } from "../edit-product-modal.component/edit-
 export class ProductListComponent {
 
   private ProductService = inject(ProductService);
+
+  selectedProductId = signal<number | null>(null);
 
   productoResource = rxResource<ProductResponse[], void>({
     stream: () => this.ProductService.getAllProducts(),
@@ -28,7 +31,8 @@ export class ProductListComponent {
 
   onEdit(id: number){
     console.log(id);
-    this.isModalOpen.set(true);
+    this.isEditModalOpen.set(true);
+    this.selectedProductId.set(id);
   }
   onDelete(id: number){
 
@@ -36,11 +40,11 @@ export class ProductListComponent {
 
   // Modal
 
-  isModalOpen = signal(false);
+  isEditModalOpen = signal(false);
 
 
   closeModal() {
-    this.isModalOpen.set(false);
+    this.isEditModalOpen.set(false);
   }
 
 }

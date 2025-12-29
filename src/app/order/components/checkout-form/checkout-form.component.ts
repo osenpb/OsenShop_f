@@ -1,10 +1,11 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, inject } from '@angular/core';
-import { OrderService } from '../../../../services/order.service';
-import { AuthService } from '../../../../services/auth.service';
+
 import { OrderFormRequest } from '../../interfaces/order-form-request.interface';
 
 import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { OrderService } from '../../../services/order.service';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-checkout-form',

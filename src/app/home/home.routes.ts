@@ -1,12 +1,11 @@
 
 
-import { CartDetailPageComponent } from "./cart/pages/cart-detail-page/cart-detail-page.component";
-import { ProductDetailComponent } from "./product/components/product-detail/product-detail.component";
+import { CartDetailPageComponent } from "../cart/pages/cart-detail-page/cart-detail-page.component";
+import { CheckoutFormPageComponent } from "../order/pages/checkout-form-page/checkout-form-page.component";
+import { ProductDetailPageComponent } from "../product/pages/product-detail-page/product-detail-page.component";
 import { HomeLayoutComponent } from "./layout/home-layout/home-layout.component";
-import { HomePageComponent } from "./pages/home-page.component/home-page.component";
-import { ProductDetailPageComponent } from "./product/pages/product-detail-page/product-detail-page.component";
-import { CheckoutFormPageComponent } from "./order/pages/checkout-form-page/checkout-form-page.component";
 
+import { HomePageComponent } from "./pages/home-page.component/home-page.component";
 
 const homeRoutes = [
   {
@@ -35,7 +34,6 @@ const homeRoutes = [
       // {
       //   path: 'brands',
       // },
-
     ],
   },
 

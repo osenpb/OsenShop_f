@@ -1,8 +1,9 @@
 import { ChangeDetectionStrategy, Component, computed, inject,  } from '@angular/core';
-import { ProductService } from '../../../../services/product.service';
+
 import { Router, RouterLink } from '@angular/router';
 import { rxResource } from '@angular/core/rxjs-interop';
 import { ProductResponse } from '../../interfaces/product-response.interface';
+import { ProductService } from '../../../services/product.service';
 
 @Component({
   selector: 'app-home-product-list',

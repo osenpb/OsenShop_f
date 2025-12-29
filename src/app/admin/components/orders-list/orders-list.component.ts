@@ -1,8 +1,9 @@
-import { OrderService } from './../../../services/order.service';
+import { OrderService } from '../../../services/order.service';
 import { DatePipe, DecimalPipe, NgClass } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject, computed } from '@angular/core';
-import { OrderResponse } from '../../../home/order/interfaces/order-response.interface';
+
 import { rxResource } from '@angular/core/rxjs-interop';
+import { OrderResponse } from '../../../order/interfaces/order-response.interface';
 
 @Component({
   selector: 'app-admin-orders-list',
