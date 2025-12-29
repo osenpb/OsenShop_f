@@ -1,0 +1,47 @@
+ <article
+          class="border rounded-lg shadow-sm hover:shadow-md transition bg-white overflow-hidden">
+
+
+          <div class="h-48 bg-gray-100 flex items-center justify-center">
+            @if (product()?.imageUrl) {
+              <img
+                [src]="product()?.imageUrl"
+                [alt]="product()?.name"
+                class="h-full w-full object-cover" />
+            }
+            @else {
+              <span class="text-gray-400 text-sm">
+                Sin imagen
+              </span>
+            }
+          </div>
+
+
+          <div class="p-4 space-y-2">
+
+            <h3 class="text-lg font-semibold text-gray-800 truncate">
+              {{ product()?.name }}
+            </h3>
+
+            <p class="text-sm text-gray-500">
+              {{ product()?.category?.name }}
+            </p>
+
+            <p class="text-gray-700 text-sm line-clamp-2">
+              {{ product()?.description }}
+            </p>
+
+            <div class="flex items-center justify-between pt-2">
+              <span class="text-lg font-bold text-black">
+                S/ {{ product()?.price  }}
+              </span>
+
+              <button
+                [routerLink]="['/home/product/detail', product()?.id]"
+                class="px-3 py-1 text-sm rounded bg-black text-white hover:bg-gray-700 transition">
+                Ver
+              </button>
+            </div>
+
+          </div>
+        </article>

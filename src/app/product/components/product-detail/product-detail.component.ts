@@ -6,10 +6,11 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ProductService } from '../../../services/product.service';
 import { CartService } from '../../../services/cart.service';
 import { NotificationService } from '../../../services/notification.service';
+import { DecimalPipe } from '@angular/common';
 
 @Component({
   selector: 'app-home-product-detail',
-  imports: [],
+  imports: [DecimalPipe],
   templateUrl: './product-detail.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

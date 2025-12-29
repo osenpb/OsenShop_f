@@ -5,6 +5,8 @@ import { ChangeDetectionStrategy, Component, inject, input, output, computed, si
 import { rxResource } from '@angular/core/rxjs-interop';
 import { ProductResponse } from '../../../product/interfaces/product-response.interface';
 import { CategoryResponse } from '../../../product/interfaces/category-response.interface';
+import { ProductRequest } from '../../../product/interfaces/product-request.interface';
+import { UpdateProductRequest } from '../../../product/interfaces/update-product-request';
 
 
 @Component({
@@ -22,47 +24,48 @@ export class EditProductModalComponent {
   open = input<boolean>(false);
   close = output<void>();
   productId = input<number>(0);
+  saved = output<void>();
 
 
-editForm = this.fb.nonNullable.group({
-  name: ['', Validators.required],
-  categoryId: [0, Validators.required],
-  price: [0, Validators.required],
-  stock: [0, Validators.required],
-  description: ['', Validators.required],
-  isActive: [true, Validators.required],
-});
-
-
-productResource = rxResource<ProductResponse | null, number>({
-  params: () => this.productId(),
-  stream: ({ params }) =>
-    this.productService.getProductById(params),
-  defaultValue: null,
-});
-
-
-
-constructor() {
-effect(() => {
-  const product = this.product();
-  if (!product) return;
-
-  this.editForm.patchValue({
-    name: product.name,
-    categoryId: +product.category.id,
-    price: product.price,
-    stock: product.stock,
-    description: product.description,
-    isActive: product.isActive,
+  editForm = this.fb.nonNullable.group({
+    name: ['', Validators.required],
+    imageUrl: ['', Validators.required],
+    categoryId: [0, Validators.required],
+    price: [0, Validators.required],
+    stock: [0, Validators.required],
+    description: ['', Validators.required],
+    isActive: [true, Validators.required],
   });
-});
-}
+
+
+  productResource = rxResource<ProductResponse | null, number>({
+    params: () => this.productId(),
+    stream: ({ params }) =>
+      this.productService.getProductById(params),
+    defaultValue: null,
+  });
+
+
+  constructor() {
+    effect(() => {
+      const product = this.product();
+      if (!product) return;
+
+      this.editForm.patchValue({
+        name: product.name,
+        categoryId: +product.category.id,
+        price: product.price,
+        stock: product.stock,
+        description: product.description,
+        isActive: product.isActive,
+      });
+    });
+  }
 
 
   categoryResource = rxResource<CategoryResponse[], void>({
     stream: () => this.categoryService.getAllCategories(),
-    }
+  }
   );
 
   categories = computed(() => {
@@ -72,21 +75,43 @@ effect(() => {
   isLoading = computed(() => this.categoryResource.isLoading());
   error = computed(() => this.categoryResource.error());
 
-
-
   product = computed(() => {
     return this.productResource.value();
   });
 
   onSave() {
-throw new Error('Method not implemented.');
-}
+  if (this.editForm.invalid) {
+    this.editForm.markAllAsTouched();
+    return;
+  }
+  const editFormControls = this.editForm.controls;
 
+  const payload: UpdateProductRequest = {
+    id: this.productId(),
+    name: editFormControls.name.value,
+    imageUrl: editFormControls.imageUrl.value,
+    categoryId: editFormControls.categoryId.value,
+    price:editFormControls.price.value,
+    stock: editFormControls.stock.value,
+    description: editFormControls.description.value,
+    isActive: editFormControls.isActive.value,
+  };
 
-
+  console.log(payload.id);
+  console.log(payload.categoryId);
+  this.productService
+    .updateProduct(this.productId(), payload)
+    .subscribe({
+      next: () => {
+        this.closeModal()
+        this.saved.emit(); // para avisar al padre del modal que se ha guardado :)
+      },
+      error: (err) => console.error(err),
+    });
+  }
 
   closeModal() {
     this.close.emit();
   }
 
- }
+}

@@ -18,6 +18,9 @@ export class ProductListComponent {
 
   selectedProductId = signal<number | null>(null);
 
+
+
+
   productoResource = rxResource<ProductResponse[], void>({
     stream: () => this.ProductService.getAllProducts(),
   })
@@ -46,6 +49,11 @@ export class ProductListComponent {
   closeModal() {
     this.isEditModalOpen.set(false);
   }
+
+  onProductUpdated() {
+  this.productoResource.reload();
+  this.closeModal();
+}
 
 }
 

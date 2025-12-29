@@ -4,6 +4,7 @@ import { CartDetailPageComponent } from "../cart/pages/cart-detail-page/cart-det
 import { CheckoutFormPageComponent } from "../order/pages/checkout-form-page/checkout-form-page.component";
 import { ProductDetailPageComponent } from "../product/pages/product-detail-page/product-detail-page.component";
 import { HomeLayoutComponent } from "./layout/home-layout/home-layout.component";
+import { AboutUsPageComponent } from "./pages/about-us-page/about-us-page.component";
 
 import { HomePageComponent } from "./pages/home-page.component/home-page.component";
 
@@ -27,10 +28,11 @@ const homeRoutes = [
       {
         path: 'checkout',
         component: CheckoutFormPageComponent
-      }
-      // {
-      //   path: 'about',
-      // },
+      },
+      {
+        path: 'about',
+        component: AboutUsPageComponent
+      },
       // {
       //   path: 'brands',
       // },
