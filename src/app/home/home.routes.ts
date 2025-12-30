@@ -5,7 +5,7 @@ import { CheckoutFormPageComponent } from "../order/pages/checkout-form-page/che
 import { ProductDetailPageComponent } from "../product/pages/product-detail-page/product-detail-page.component";
 import { HomeLayoutComponent } from "./layout/home-layout/home-layout.component";
 import { AboutUsPageComponent } from "./pages/about-us-page/about-us-page.component";
-
+import { BrandsPageComponent } from "./pages/brands-page/brands-page.component";
 import { HomePageComponent } from "./pages/home-page.component/home-page.component";
 
 const homeRoutes = [
@@ -33,9 +33,10 @@ const homeRoutes = [
         path: 'about',
         component: AboutUsPageComponent
       },
-      // {
-      //   path: 'brands',
-      // },
+      {
+        path: 'brands',
+        component: BrandsPageComponent
+      },
     ],
   },
 

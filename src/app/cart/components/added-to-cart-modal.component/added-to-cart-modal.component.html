@@ -1,0 +1,55 @@
+<div class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 transition-opacity" (click)="close()">
+
+  <div
+    class="absolute right-0 top-0 h-full w-full max-w-sm bg-black border-l border-zinc-900 shadow-2xl p-8 flex flex-col"
+    (click)="$event.stopPropagation()"
+  >
+
+    <div class="flex items-center justify-between mb-12">
+      <h2 class="text-[10px] uppercase tracking-[0.4em] text-zinc-500 font-bold">Bolsa de Compras</h2>
+      <button (click)="close()" class="text-zinc-500 hover:text-white transition-colors">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+
+    <div class="flex-1 space-y-8">
+      <div class="flex items-center gap-4">
+        <div class="w-10 h-10 bg-emerald-500/10 rounded-full flex items-center justify-center shrink-0">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+          </svg>
+        </div>
+        <p class="text-xs uppercase tracking-widest text-zinc-300 font-medium">Producto añadido con éxito</p>
+      </div>
+
+      <div class="flex gap-4 p-4 rounded-2xl border border-zinc-900 bg-zinc-950/50">
+        <div class="w-20 h-20 rounded-lg overflow-hidden border border-zinc-800 bg-black">
+          <img [src]="product()?.imageUrl" class="w-full h-full object-cover opacity-80" />
+        </div>
+        <div class="flex flex-col justify-center space-y-1">
+          <h3 class="text-xs font-bold text-white truncate w-40 italic uppercase">{{ product()?.name }}</h3>
+          <p class="text-[10px] text-zinc-500 font-mono tracking-tighter">CANTIDAD: {{ quantity() }}</p>
+          <p class="text-xs text-zinc-100">${{ product()!.price * quantity() | number:'1.2-2' }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="space-y-4 pt-8 border-t border-zinc-900">
+      <button
+        class="w-full py-4 bg-white text-black rounded-full text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-zinc-200 transition-all active:scale-95"
+      >
+        Ir a mi Carrito
+      </button>
+
+      <button
+        (click)="close()"
+        class="w-full py-4 border border-zinc-800 text-zinc-400 rounded-full text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-zinc-900 hover:text-white transition-all"
+      >
+        Continuar Comprando
+      </button>
+    </div>
+
+  </div>
+</div>

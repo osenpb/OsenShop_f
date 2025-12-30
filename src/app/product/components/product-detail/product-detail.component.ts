@@ -2,22 +2,23 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ChangeDetectionStrategy, Component, inject, signal, computed } from '@angular/core';
 import { ProductResponse } from '../../interfaces/product-response.interface';
 import { rxResource } from '@angular/core/rxjs-interop';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { ProductService } from '../../../services/product.service';
 import { CartService } from '../../../services/cart.service';
 import { NotificationService } from '../../../services/notification.service';
 import { DecimalPipe } from '@angular/common';
+import { AddedToCartModalComponent } from "../../../cart/components/added-to-cart-modal.component/added-to-cart-modal.component";
+import { LoadingSpinnerComponent } from "../../../home/components/loading-spinner/loading-spinner.component";
 
 @Component({
   selector: 'app-home-product-detail',
-  imports: [DecimalPipe],
+  imports: [DecimalPipe, LoadingSpinnerComponent],
   templateUrl: './product-detail.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductDetailComponent {
 
   private productService = inject(ProductService);
-  private router = inject(Router);
+
   private route = inject(ActivatedRoute);
   private cartService = inject(CartService);
   private notification = inject(NotificationService);
@@ -26,6 +27,7 @@ export class ProductDetailComponent {
   // Signals
   quantity = signal(1);
 
+  cart = this.cartService.cart;
 
   productId = computed(() => {
     return Number(this.route.snapshot.paramMap.get('id'));
@@ -33,7 +35,7 @@ export class ProductDetailComponent {
 
   productResource = rxResource<ProductResponse, void>({
     stream: () => this.productService.getProductById(this.productId()
-      ),
+    ),
   });
 
   product = computed(() => {
@@ -42,6 +44,37 @@ export class ProductDetailComponent {
 
   error = computed(() => this.productResource.error());
   isLoading = computed(() => this.productResource.isLoading());
+
+  canAddMore = computed(() => {
+  const product = this.product();
+  if (!product) return false;
+
+  return this.productQuantityInCart() < product.stock;
+});
+
+
+  productQuantityInCart = computed(() => {
+    const cart = this.cart();
+    const product = this.product();
+
+    if (!cart || !product) return 0;
+
+    const item = cart.cartItemsResponse.find(
+      i => i.productResponse.id === product.id
+    );
+
+    return item?.quantity ?? 0;
+  });
+
+  canAddSelectedQuantity = computed(() => {
+  const product = this.product();
+  if (!product) return false;
+
+  return (
+    this.productQuantityInCart() + this.quantity()
+  ) <= product.stock;
+});
+
 
   // CartService actions
 
@@ -65,7 +98,12 @@ export class ProductDetailComponent {
   }
 
   decrease() {
-    this.quantity.set(this.clampQuantity(this.quantity() - 1));
+    if(this.quantity() > 1){
+      this.quantity.set(this.clampQuantity(this.quantity() - 1));
+    }
+    else{
+      this.quantity.set(0);
+    }
   }
 
   setQuantity(value: number) {
@@ -76,6 +114,8 @@ export class ProductDetailComponent {
     const stock = this.product()!.stock;
     return Math.min(Math.max(1, value), stock);
   }
+
+
 
 
 }

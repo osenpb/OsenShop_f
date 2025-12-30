@@ -13,6 +13,9 @@
         + Añadir Producto
       </button>
     </div>
+         @if (isLoading()) {
+              <app-loading-spinner />
+            }
 
     <div class="backdrop-blur-md bg-zinc-900/30 border border-zinc-800 rounded-2xl overflow-hidden">
       <div class="overflow-x-auto">
@@ -50,7 +53,7 @@
 
                 <td class="px-6 py-4">
                   <span class="text-sm font-semibold text-white tracking-tight">
-                    ${{ product.price | number:'1.2-2' }}
+                    s/. {{ product.price | number:'1.2-2' }}
                   </span>
                 </td>
 

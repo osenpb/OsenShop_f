@@ -15,7 +15,7 @@
   @if (isLoading()) {
 
     <div class="text-center text-neutral-500">
-      Cargando carrito...
+      <app-loading-spinner />
     </div>
 
   } @else if (cartItems().length === 0) {

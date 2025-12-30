@@ -9,10 +9,11 @@ import { ActivatedRoute, Router, RouterLink } from "@angular/router";
 import { CartItemListComponent } from "../../components/cart-item-list/cart-item-list.component";
 import { CartSummaryComponent } from "../../components/cart-summary/cart-summary.component";
 import { CartService } from '../../../services/cart.service';
+import { LoadingSpinnerComponent } from "../../../home/components/loading-spinner/loading-spinner.component";
 
 @Component({
   selector: 'app-cart-detail-page',
-  imports: [CartItemListComponent, CartSummaryComponent],
+  imports: [CartItemListComponent, CartSummaryComponent, LoadingSpinnerComponent],
   templateUrl: './cart-detail-page.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

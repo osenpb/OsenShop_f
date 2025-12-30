@@ -5,10 +5,11 @@ import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@a
 import { DecimalPipe } from '@angular/common';
 import { EditProductModalComponent } from "../edit-product-modal.component/edit-product-modal.component";
 import { ProductResponse } from '../../../product/interfaces/product-response.interface';
+import { LoadingSpinnerComponent } from "../../../home/components/loading-spinner/loading-spinner.component";
 
 @Component({
   selector: 'app-admin-product-list',
-  imports: [DecimalPipe, EditProductModalComponent],
+  imports: [DecimalPipe, EditProductModalComponent, LoadingSpinnerComponent],
   templateUrl: './product-list.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -17,7 +18,6 @@ export class ProductListComponent {
   private ProductService = inject(ProductService);
 
   selectedProductId = signal<number | null>(null);
-
 
 
 
