@@ -13,7 +13,7 @@ export class CartService {
   private readonly http = inject(HttpClient);
 
   // === RESOURCE ===
-  readonly cartResource = rxResource<CartResponse, void>({
+  cartResource = rxResource<CartResponse, void>({
     stream: () => this.http.get<CartResponse>(this.baseUrl),
   });
 
