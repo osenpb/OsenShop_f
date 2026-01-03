@@ -4,6 +4,7 @@ import { inject, Injectable } from '@angular/core';
 import { ProductResponse } from '../product/interfaces/product-response.interface';
 import { ProductRequest } from '../product/interfaces/product-request.interface';
 import { UpdateProductRequest } from '../product/interfaces/update-product-request';
+import { environment } from '../../environments/environment';
 
 
 @Injectable({
@@ -11,7 +12,7 @@ import { UpdateProductRequest } from '../product/interfaces/update-product-reque
 })
 export class ProductService {
 
-  private readonly baseUrl = 'http://localhost:8080/api/v1/products';
+  private readonly baseUrl = `${environment.apiUrl}/products`;
   private http = inject(HttpClient);
 
   getAllProducts() {

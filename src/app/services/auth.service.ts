@@ -3,9 +3,10 @@ import { computed, inject, Injectable, signal } from '@angular/core';
 import { UserResponse } from '../auth/interfaces/user-response.interface';
 import { RegisterRequest } from '../auth/interfaces/register-request.interface';
 import { LoginRequest } from '../auth/interfaces/login-request.interface';
-import { catchError, map, Observable, of, tap, throwError } from 'rxjs';
+import { catchError, map, Observable, of, tap } from 'rxjs';
 import { AuthResponse } from '../auth/interfaces/auth-response.interface';
 import { rxResource } from '@angular/core/rxjs-interop';
+import { environment } from '../../environments/environment';
 
 type AuthStatus = 'checking' | 'authenticated' | 'not-authenticated';
 
@@ -13,8 +14,9 @@ type AuthStatus = 'checking' | 'authenticated' | 'not-authenticated';
   providedIn: 'root'
 })
 export class AuthService {
+
   // API base url
-  private readonly baseUrl = 'http://localhost:8080/api/v1/auth'; // esto ponerlo en el .env
+  private readonly baseUrl = `${environment.apiUrl}/auth`; // esto ponerlo en el .env
 
   // HttpClient
   private http = inject(HttpClient);
@@ -73,6 +75,7 @@ export class AuthService {
 
   // check if there is a token in local storage and validate it
   checkStatus(): Observable<boolean> {
+
     //const token = localStorage.getItem('token');
     const token = this._token();
 
@@ -87,7 +90,6 @@ export class AuthService {
       .pipe(
         tap(resp => this.handleAuthSuccess(resp)),
         map(() => true),
-          //catchError(() => of(false))
         catchError((error: any) => this.handleError(error))
       );
   }

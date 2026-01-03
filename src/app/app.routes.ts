@@ -13,6 +13,10 @@ export const routes: Routes = [
     path: 'admin',
     loadChildren: () => import('./admin/admin.routes').then(m => m.default),
   },
+  {
+    path: 'order',
+    loadChildren: () => import('./order/order.routes'),
+  },
    {
     path: '**',
     redirectTo: 'auth/login',

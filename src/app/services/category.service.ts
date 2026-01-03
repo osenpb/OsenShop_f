@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { CategoryResponse } from '../product/interfaces/category-response.interface';
 import { CategoryRequest } from '../product/interfaces/category-request.interface';
+import { environment } from '../../environments/environment';
 
 
 @Injectable({
@@ -9,7 +10,7 @@ import { CategoryRequest } from '../product/interfaces/category-request.interfac
 })
 export class CategoryService {
 
-  private readonly baseUrl = 'http://localhost:8080/api/v1/categories';
+  private readonly baseUrl = `${environment.apiUrl}/categories`;
   private http = inject(HttpClient);
 
   getAllCategories() {

@@ -3,13 +3,14 @@ import { HttpClient } from '@angular/common/http';
 import { rxResource } from '@angular/core/rxjs-interop';
 import { CartResponse } from '../cart/interfaces/cart-response.interface';
 import { CartItemResponse } from '../cart/interfaces/cart-item-response.interface';
+import { environment } from '../../environments/environment';
 
 
 
 @Injectable({ providedIn: 'root' })
 export class CartService {
 
-  private readonly baseUrl = 'http://localhost:8080/api/v1/cart';
+  private readonly baseUrl = `${environment.apiUrl}/cart`;
   private readonly http = inject(HttpClient);
 
   // === RESOURCE ===

@@ -1,16 +1,16 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, inject } from '@angular/core';
+import { Router } from '@angular/router';
+import { ChangeDetectionStrategy, Component, EventEmitter, inject, signal } from '@angular/core';
 
 import { OrderFormRequest } from '../../interfaces/order-form-request.interface';
-
-import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { OrderService } from '../../../services/order.service';
 import { AuthService } from '../../../services/auth.service';
 import { CartService } from '../../../services/cart.service';
+import { SuccessModalOrderComponent } from "../success-modal-order.component/success-modal-order.component";
 
 @Component({
   selector: 'app-checkout-form',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, SuccessModalOrderComponent],
   templateUrl: './checkout-form.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -23,6 +23,9 @@ export class CheckoutComponent {
   private fb = inject(FormBuilder)
   private router = inject(Router);
   readonly user = this.authService.user;
+
+  showSuccessModal = signal(false);
+
 
   cart = this.cartService.cart;
 
@@ -42,10 +45,14 @@ export class CheckoutComponent {
     .subscribe({
       next: () => {
         this.cartService.cartResource.reload();
-        this.router.navigate(['/home/index'])
+
+        this.showSuccessModal.set(true);
+
+        setTimeout(() => {
+          this.router.navigate(['/home/index']);
+        }, 4000);
       },
       error: () => console.log('error')
     });
   }
-
 }

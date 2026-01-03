@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { OrderResponse } from '../order/interfaces/order-response.interface';
 import { OrderFormRequest } from '../order/interfaces/order-form-request.interface';
+import { environment } from '../../environments/environment';
 
 
 @Injectable({
@@ -10,11 +11,15 @@ import { OrderFormRequest } from '../order/interfaces/order-form-request.interfa
 })
 export class OrderService {
 
-  private readonly baseUrl = 'http://localhost:8080/api/v1/orders';
+  private readonly baseUrl = `${environment.apiUrl}/orders`;
   private http = inject(HttpClient);
 
   getAllOrders() {
     return this.http.get<OrderResponse[]>(`${this.baseUrl}`);
+  }
+
+  getOrdersByUserId() {
+    return this.http.get<OrderResponse[]>(`${this.baseUrl}/my-orders`);
   }
 
   getOrderById(id: number) {
@@ -25,5 +30,7 @@ export class OrderService {
     return this.http.post<OrderResponse>(`${this.baseUrl}/checkout`, orderForm);
   }
 
-
+  updateStatus(orderId: number) {
+    return this.http.post(`${this.baseUrl}/update-status`, orderId);
+  }
 }
