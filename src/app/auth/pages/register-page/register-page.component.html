@@ -23,6 +23,11 @@
         class="flex h-9 w-full rounded-md border border-zinc-800 bg-zinc-950/50 px-3 py-1 text-sm text-zinc-100 ring-offset-black placeholder:text-zinc-700 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-zinc-400 transition-all"
         placeholder="Juan"
       />
+       @if (formUtils.isValidField(form,'firstName')) {
+            <div class="text-sm text-red-500 mt-1">
+                {{ formUtils.getFieldError(form, 'firstName') }}
+            </div>
+        }
     </div>
     <div class="space-y-2">
       <label class="text-xs font-medium uppercase tracking-wider text-zinc-400">
@@ -34,6 +39,11 @@
         class="flex h-9 w-full rounded-md border border-zinc-800 bg-zinc-950/50 px-3 py-1 text-sm text-zinc-100 ring-offset-black placeholder:text-zinc-700 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-zinc-400 transition-all"
         placeholder="Pérez"
       />
+       @if (formUtils.isValidField(form,'lastName')) {
+            <div class="text-sm text-red-500 mt-1">
+                {{ formUtils.getFieldError(form, 'lastName') }}
+            </div>
+        }
     </div>
   </div>
 
@@ -47,6 +57,11 @@
       class="flex h-10 w-full rounded-md border border-zinc-800 bg-zinc-950/50 px-3 py-2 text-sm text-zinc-100 ring-offset-black placeholder:text-zinc-700 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-zinc-400 transition-all"
       placeholder="correo@ejemplo.com"
     />
+        @if (formUtils.isValidField(form,'email')) {
+            <div class="text-sm text-red-500 mt-1">
+                {{ formUtils.getFieldError(form, 'email') }}
+            </div>
+        }
   </div>
 
   <div class="space-y-2">
@@ -59,6 +74,11 @@
       class="flex h-10 w-full rounded-md border border-zinc-800 bg-zinc-950/50 px-3 py-2 text-sm text-zinc-100 ring-offset-black placeholder:text-zinc-700 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-zinc-400 transition-all"
       placeholder="••••••••"
     />
+        @if (formUtils.isValidField(form,'password')) {
+            <div class="text-sm text-red-500 mt-1">
+                {{ formUtils.getFieldError(form, 'password') }}
+            </div>
+        }
     <p class="text-[10px] text-zinc-500 italic">Mínimo 8 caracteres.</p>
   </div>
 

@@ -1,7 +1,10 @@
+import { FormUtils } from './../../../helpers/utils';
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../../services/auth.service';
 import { Router, RouterLink } from '@angular/router';
+import { catchError, of } from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-login-page.component',
@@ -16,6 +19,12 @@ export class LoginPageComponent {
   private fb = inject(FormBuilder)
   private authService = inject(AuthService);
   private router = inject(Router);
+
+  errorMessage = signal('');
+
+
+  //Helper to valite form fields
+  formUtils = FormUtils;
 
   form = this.fb.nonNullable.group({
     email: ['', [Validators.required, Validators.email]],
@@ -32,14 +41,20 @@ export class LoginPageComponent {
         next: () => {
           this.loading.set(false)
           console.log(this.authService.user()?.role);
-          if(this.authService.user()?.role === "ROLE_ADMIN"){
+          if (this.authService.user()?.role === "ROLE_ADMIN") {
             this.router.navigate(['/admin']);
-          }else if(this.authService.user()?.role === "ROLE_USER"){
+
+          } else if (this.authService.user()?.role === "ROLE_USER") {
             this.router.navigate(['/home/index']);
+
           }
         },
-        error: () => this.loading.set(false)
-      });
+        error: (err) => {
+          this.loading.set(false)
+          this.errorMessage.set(err.message);
+        }
+      }
+      );
   }
 
 }

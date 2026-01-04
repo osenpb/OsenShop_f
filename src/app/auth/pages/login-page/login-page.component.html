@@ -11,7 +11,11 @@
     Introduce tus credenciales para acceder
   </p>
 </div>
-
+    @if(errorMessage()){
+      <div class="text-sm text-red-500 mt-1 text-center">
+        {{ errorMessage() }}
+      </div>
+    }
   <div class="space-y-2">
     <label class="text-sm font-medium leading-none text-zinc-300 peer-disabled:cursor-not-allowed peer-disabled:opacity-70 mb-3">
       Correo electrónico
@@ -22,6 +26,11 @@
       class="flex h-10 w-full rounded-md border border-zinc-800 bg-zinc-950/50 px-3 py-2 text-sm text-zinc-100 ring-offset-black file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-zinc-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-400 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 transition-all duration-200"
       placeholder="nombre@ejemplo.com"
     />
+     @if (formUtils.isValidField(form,'email')) {
+            <div class="text-sm text-red-500 mt-1">
+                {{ formUtils.getFieldError(form, 'email') }}
+            </div>
+        }
   </div>
 
   <div class="space-y-2">
@@ -37,6 +46,11 @@
       class="flex h-10 w-full rounded-md border border-zinc-800 bg-zinc-950/50 px-3 py-2 text-sm text-zinc-100 ring-offset-black placeholder:text-zinc-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-400 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 transition-all duration-200"
       placeholder="••••••••"
     />
+     @if (formUtils.isValidField(form,'password')) {
+            <div class="text-sm text-red-500 mt-1">
+                {{ formUtils.getFieldError(form, 'password') }}
+            </div>
+        }
   </div>
 
   <button
@@ -57,7 +71,11 @@
         Entrar
       }
     </span>
+
   </button>
+
+
+
   <p class="text-center text-sm text-zinc-500 mt-4">
     ¿Aún no tienes cuenta?
     <a [routerLink]="['/auth/register']" class="text-zinc-200 hover:underline underline-offset-4 cursor-pointer">Regístrate aquí</a>

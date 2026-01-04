@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../../services/auth.service';
 import { Router, RouterLink } from '@angular/router';
+import { FormUtils } from '../../../helpers/utils';
 
 @Component({
   selector: 'app-register-page.component',
@@ -15,6 +16,7 @@ export class RegisterPageComponent {
   private authService = inject(AuthService);
   private router = inject(Router);
 
+  formUtils = FormUtils;
 
   form = this.fb.nonNullable.group({
     firstName: ['', Validators.required],

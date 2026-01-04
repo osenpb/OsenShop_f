@@ -3,7 +3,7 @@ import { computed, inject, Injectable, signal } from '@angular/core';
 import { UserResponse } from '../auth/interfaces/user-response.interface';
 import { RegisterRequest } from '../auth/interfaces/register-request.interface';
 import { LoginRequest } from '../auth/interfaces/login-request.interface';
-import { catchError, map, Observable, of, tap } from 'rxjs';
+import { catchError, map, Observable, of, tap, throwError } from 'rxjs';
 import { AuthResponse } from '../auth/interfaces/auth-response.interface';
 import { rxResource } from '@angular/core/rxjs-interop';
 import { environment } from '../../environments/environment';
@@ -29,8 +29,8 @@ export class AuthService {
 
   // === PUBLIC STATES ===
   authStatus = computed(() => {
-    if(this._authStatus() === 'checking') return 'checking';
-    if(this._user()) return 'authenticated';
+    if (this._authStatus() === 'checking') return 'checking';
+    if (this._user()) return 'authenticated';
     else return 'not-authenticated';
   });
 
@@ -47,11 +47,22 @@ export class AuthService {
     return this.http.post<UserResponse>(`${this.baseUrl}/register`, registerRequest);
   }
 
-  login(loginRequest: LoginRequest){
+  login(loginRequest: LoginRequest) {
     return this.http.post<AuthResponse>(`${this.baseUrl}/login`, loginRequest)
       .pipe(
         tap(resp => this.handleAuthSuccess(resp)),
-        catchError((error: any) => this.handleError(error))
+        // catchError((error: any) => this.handleError(error))
+        catchError((error: HttpErrorResponse) => {
+          let message = 'Error al iniciar sesión';
+
+          if (error.status === 403) {
+            message = 'El correo o la contraseña no son correctos';
+          } else if (error.status === 0) {
+            message = 'No se pudo conectar con el servidor';
+          }
+
+          return throwError(() => new Error(message));
+        })
       );
   }
 
@@ -61,8 +72,8 @@ export class AuthService {
         tap((user: UserResponse) => {
           this._user.set(user);
         }
-      ),
-    );
+        ),
+      );
   }
 
   logout() {
@@ -99,7 +110,7 @@ export class AuthService {
     return of(false);
   }
 
-  private handleAuthSuccess(resp: AuthResponse) : boolean {
+  private handleAuthSuccess(resp: AuthResponse): boolean {
 
     const accessToken = resp.tokens.accessToken;
 
