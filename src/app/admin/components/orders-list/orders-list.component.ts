@@ -13,21 +13,21 @@ import { OrderResponse } from '../../../order/interfaces/order-response.interfac
 })
 export class OrderListComponent {
 
-    private orderService = inject(OrderService);
+  private orderService = inject(OrderService);
 
-    ordersResource = rxResource<OrderResponse[], void>({
-      stream: () => this.orderService.getAllOrders(),
-    });
-
-
-    orders = computed(() => {return this.ordersResource.value() ?? []});
-
-    isLoading = this.ordersResource.isLoading();
-    error = this.ordersResource.error();
+  ordersResource = rxResource<OrderResponse[], void>({
+    stream: () => this.orderService.getAllOrders(),
+  });
 
 
+  orders = computed(() => { return this.ordersResource.value() ?? [] });
 
-viewDetails(arg0: any) {
-throw new Error('Method not implemented.');
-}
+  isLoading = this.ordersResource.isLoading();
+  error = this.ordersResource.error();
+
+
+
+  viewDetails(arg0: any) {
+    throw new Error('Method not implemented.');
+  }
 }

@@ -1,3 +1,4 @@
+import { CheckoutFormPageComponent } from "./pages/checkout-form-page/checkout-form-page.component";
 import { MyOrdersComponent } from "./pages/my-orders-page/my-orders-page.component";
 
 const orderRoutes = [
@@ -8,11 +9,10 @@ const orderRoutes = [
         path: '',
         component: MyOrdersComponent
       },
-      // {
-      //   path: 'detail/:id',
-      //   component: OrderDetailPageComponent
-
-      // },
+      {
+        path: 'checkout',
+        component: CheckoutFormPageComponent
+      },
     ],
   },
 ];

@@ -4,11 +4,12 @@ import { CategoryListComponent } from "../../components/category-list/category-l
 import { NewsletterFormComponent } from "../../components/newsletter-form/newsletter-form.component";
 import { ImageHeaderComponent } from "../../layout/image-header/image-header.component";
 import { ProductListComponent } from '../../../product/components/product-list/product-list.component';
+import { SearchByWordComponent } from "../../../product/components/search-by-word/search-by-word.component";
 
 
 @Component({
   selector: 'app-home-page',
-  imports: [ProductListComponent, CategoryListComponent, NewsletterFormComponent, ImageHeaderComponent],
+  imports: [ProductListComponent, CategoryListComponent, NewsletterFormComponent, ImageHeaderComponent, SearchByWordComponent],
   templateUrl: './home-page.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

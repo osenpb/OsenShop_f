@@ -21,10 +21,10 @@ const homeRoutes = [
         path: 'product/detail/:id',
         component: ProductDetailPageComponent
       },
-      {
-        path: 'cart',
-        component: CartDetailPageComponent
-      },
+      // {
+      //   path: 'cart',
+      //   component: CartDetailPageComponent
+      // },
       {
         path: 'checkout',
         component: CheckoutFormPageComponent

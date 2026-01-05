@@ -6,9 +6,11 @@ const cartRoutes = [
     path: '',
     children: [
       {
-        path: 'detail',
+        path: '',
         component: CartDetailPageComponent
       },
     ],
   },
 ];
+
+export default cartRoutes;

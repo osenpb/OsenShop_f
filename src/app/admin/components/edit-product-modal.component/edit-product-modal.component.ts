@@ -45,7 +45,7 @@ export class EditProductModalComponent {
     defaultValue: null,
   });
 
-
+  // Cargar los datos del producto en el formulario
   constructor() {
     effect(() => {
       const product = this.product();
@@ -53,6 +53,7 @@ export class EditProductModalComponent {
 
       this.editForm.patchValue({
         name: product.name,
+        imageUrl: product.imageUrl,
         categoryId: +product.category.id,
         price: product.price,
         stock: product.stock,
